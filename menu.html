@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taj Restaurant Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #6dce4fdb;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+
+    .menu-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    .menu-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .menu-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .menu-item img {
+      max-width: 100%;
+      max-height: 100px;
+      margin-bottom: 10px;
+    }
+
+    #order-list {
+      margin-top: 20px;
+    }
+
+    #total {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Taj Restaurant Menu</h1>
+  </header>
+
+  <div class="menu-container">
+    <!-- Non-Veg Items -->
+    <div class="menu-item" onclick="addToOrder('Chicken Biryani', 250)">
+      <img src="chikbir.jpg" alt="Chicken Biryani">
+      <p>Chicken Biryani</p>
+      <p>₹250</p>
+    </div>
+
+    <!-- Add similar markup for other non-veg items -->
+
+    <!-- Veg Items -->
+    <div class="menu-item" onclick="addToOrder('Vegetable Biryani', 200)">
+      <img src="vegbir.jpg" alt="Vegetable Biryani">
+      <p>Vegetable Biryani</p>
+      <p>₹200</p>
+    </div>
+
+    <!-- Add similar markup for other veg items -->
+  </div>
+
+  <div id="order-list">
+    <h2>Your Order:</h2>
+    <ul id="order-items"></ul>
+    <p id="total">Total: ₹<span id="total-price">0</span></p>
+  </div>
+
+  <script>
+    let order = [];
+    let total = 0;
+
+    function addToOrder(item, price) {
+      order.push({ item, price });
+      total += price;
+      updateOrderList();
+    }
+
+    function updateOrderList() {
+      const orderList = document.getElementById('order-items');
+      const totalPriceElement = document.getElementById('total-price');
+
+      orderList.innerHTML = '';
+      order.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.item} - ₹${item.price}`;
+        orderList.appendChild(li);
+      });
+
+      totalPriceElement.textContent = total;
+    }
+  </script>
+</body>
+</html>
